@@ -1,4 +1,3 @@
-\l bin/test.q
 .cf.OPERATOR:("+-*><.@#$%^&!_',\/=|~?/")
 .cf.SPLIT:("{([;:])}")
 .cf.QSQL:("select";"from";"where";"by")
@@ -22,12 +21,7 @@
 .cf.colorWrap:{[color;str]
  :str sv .cf.COLOR_CODE[color,`ENDC];
  }
-.cf.changePalette:{[]
- new:first 1?("40";"41";"42";"43";"44";"45";"46";"47");
- .cf.COLOR_CODE:(-1_'.cf.COLOR_CODE),\:";",new,"m";
- -1 .cf.colorWrap[`UNDERRED;"Palette Changed"];
- }
-.cf.tagit:{[clrs;splt;clr;str] $[all null id:where null clrs;clrs;@[clrs;id;:;?[{x~y[0]}[str;]each splt id;clr;`]]]}
+.cf.tagit:{[clrs;splt;clr;str] $[all null id:where null clrs;clrs;@[clrs;where str~/:{@[first;x;0b]}each splt;:;clr]]}
 /parse colours
 .cf.colorise:{[d;qt]
  /if this is a table - use the logic from .h.jx
